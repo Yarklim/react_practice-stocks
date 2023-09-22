@@ -1,0 +1,15 @@
+.menuList {
+  display: flex;
+  gap: 20px;
+}
+
+.menuItem {
+  font-size: 18px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.active {
+  text-decoration: underline;
+}
