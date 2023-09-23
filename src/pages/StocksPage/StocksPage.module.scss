@@ -1,7 +1,15 @@
 .stocksPage {
   height: calc(100vh - 51px);
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   padding: 0 20px;
 
   background-color: #88b883;
+}
+
+.title {
+  margin-top: 20px;
 }
