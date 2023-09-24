@@ -1,0 +1,14 @@
+.stockItem {
+  padding: 10px 20px;
+
+  border: 1px solid rgb(64, 207, 243);
+  border-radius: 10px;
+  background-color: rgb(64, 207, 243);
+
+  cursor: pointer;
+
+  &:hover {
+    color: azure;
+    background-color: rgb(155, 155, 155);
+  }
+}

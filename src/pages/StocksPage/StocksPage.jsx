@@ -7,6 +7,9 @@ const StocksPage = () => {
   const [favorites, setFavorites] = useState([]);
 
   const addSymbolToFavorites = (stock) => {
+    const favorite = favorites.find((item) => item.figi === stock.figi);
+    if (favorite) return;
+
     setFavorites((prev) => [stock, ...prev]);
   };
 
