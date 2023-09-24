@@ -8,7 +8,7 @@ const StocksList = ({ stocks, deleteFromFavorite }) => {
       {stocks?.map((stock) => (
         <StockItem
           key={stock.figi}
-          stock={stock}
+          symbol={stock}
           deleteFromFavorite={deleteFromFavorite}
         />
       ))}

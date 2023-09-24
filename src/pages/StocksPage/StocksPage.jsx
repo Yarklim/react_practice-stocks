@@ -1,31 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchStocks from '../../components/SearchStocks/SearchStocks';
 import StocksList from '../../components/StocksList/StocksList';
+import { addSymbolToFavorites } from '../../helpers/addSymbolToFavorites';
 import s from './StocksPage.module.scss';
+import { deleteSymbolFromFavorites } from '../../helpers/deleteSymbolFromFavorites';
 
 const StocksPage = () => {
   const [favorites, setFavorites] = useState([]);
 
-  const addToFavorites = (stock) => {
-    const favorite = favorites.find((item) => item.figi === stock.figi);
-    if (favorite) return;
-
+  useEffect(() => {
     const storage = localStorage.getItem('favorites');
     if (storage) {
-      localStorage.setItem(
-        'favorites',
-        JSON.stringify([stock.symbol, ...JSON.parse(storage)])
-      );
-    } else {
-      localStorage.setItem('favorites', JSON.stringify([stock.symbol]));
+      setFavorites(JSON.parse(storage));
     }
+  }, []);
 
-    setFavorites((prev) => [stock, ...prev]);
+  const addToFavorites = (symbol) => {
+    addSymbolToFavorites(symbol, favorites, () =>
+      setFavorites((prev) => [symbol, ...prev])
+    );
   };
 
   const deleteFromFavorite = (symbol) => {
-    const filteredStocks = favorites.filter((el) => el.symbol !== symbol);
-    setFavorites(filteredStocks);
+    deleteSymbolFromFavorites(symbol, (newArr) => setFavorites(newArr));
   };
 
   return (

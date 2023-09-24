@@ -13,9 +13,9 @@ const fetchStock = async (symbol) => {
   return stock;
 };
 
-const StockItem = ({ stock, deleteFromFavorite }) => {
-  const { data, isLoading } = useQuery(`getStock/${stock.symbol}`, () =>
-    fetchStock(stock.symbol)
+const StockItem = ({ symbol, deleteFromFavorite }) => {
+  const { data, isLoading } = useQuery(`getStock/${symbol}`, () =>
+    fetchStock(symbol)
   );
   return (
     <li className={s.stockItem}>
@@ -27,7 +27,9 @@ const StockItem = ({ stock, deleteFromFavorite }) => {
               src={data?.logo || stockImg}
               alt={data?.name}
             />
-          ) : null}
+          ) : (
+            <div>Loading...</div>
+          )}
         </div>
         <div className={s.infoDesc}>
           <p style={{ fontWeight: 500 }}>{data?.ticker}</p>
@@ -36,8 +38,8 @@ const StockItem = ({ stock, deleteFromFavorite }) => {
           </p>
         </div>
       </div>
-      <p>{stock.description}</p>
-      <p onClick={() => deleteFromFavorite(stock.symbol)} className={s.delete}>
+      <p>{symbol.description}</p>
+      <p onClick={() => deleteFromFavorite(symbol)} className={s.delete}>
         Delete
       </p>
     </li>
