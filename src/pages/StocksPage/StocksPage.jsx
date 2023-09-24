@@ -10,6 +10,16 @@ const StocksPage = () => {
     const favorite = favorites.find((item) => item.figi === stock.figi);
     if (favorite) return;
 
+    const storage = localStorage.getItem('favorites');
+    if (storage) {
+      localStorage.setItem(
+        'favorites',
+        JSON.stringify([stock.symbol, ...JSON.parse(storage)])
+      );
+    } else {
+      localStorage.setItem('favorites', JSON.stringify([stock.symbol]));
+    }
+
     setFavorites((prev) => [stock, ...prev]);
   };
 
