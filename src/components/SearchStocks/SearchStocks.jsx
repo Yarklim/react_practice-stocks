@@ -4,7 +4,7 @@ import stocksApi from '../../api/stocksApi';
 import { filterStocks } from '../../helpers/filterStocks';
 import s from './SearchStocks.module.scss';
 
-const SearchStocks = ({ addSymbolToFavorites }) => {
+const SearchStocks = ({ addToFavorites }) => {
   const { data } = useQuery('getStocks', () => stocksApi['getStocks']());
   const [value, setValue] = useState('');
   const [stocks, setStocks] = useState([]);
@@ -31,7 +31,7 @@ const SearchStocks = ({ addSymbolToFavorites }) => {
 
   const selectStock = (stock) => {
     setValue(stock.description);
-    addSymbolToFavorites(stock);
+    addToFavorites(stock);
   };
 
   return (
@@ -45,7 +45,7 @@ const SearchStocks = ({ addSymbolToFavorites }) => {
           onChange={(e) => setValue(e.target.value)}
           type="text"
         />
-        <span onClick={() => setValue('')}>x</span>
+        <span onClick={() => setValue('')}>Clear</span>
       </div>
       {focus && stocks.length ? (
         <ul className={s.list} ref={autocompliteRef}>

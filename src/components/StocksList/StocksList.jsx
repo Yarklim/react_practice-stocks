@@ -2,11 +2,15 @@ import React from 'react';
 import StockItem from '../StockItem/StockItem';
 import s from './StocksList.module.scss';
 
-const StocksList = ({ favorites }) => {
+const StocksList = ({ stocks, deleteFromFavorite }) => {
   return (
     <ul className={s.container}>
-      {favorites?.map((stock) => (
-        <StockItem key={stock.figi} stock={stock} />
+      {stocks?.map((stock) => (
+        <StockItem
+          key={stock.figi}
+          stock={stock}
+          deleteFromFavorite={deleteFromFavorite}
+        />
       ))}
     </ul>
   );

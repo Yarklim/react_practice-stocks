@@ -1,14 +1,23 @@
 .stockItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+
   padding: 10px 20px;
 
   border: 1px solid rgb(64, 207, 243);
   border-radius: 10px;
   background-color: rgb(64, 207, 243);
 
-  cursor: pointer;
-
   &:hover {
-    color: azure;
-    background-color: rgb(155, 155, 155);
+    background-color: rgba(64, 207, 243, 0.815);
   }
+}
+
+.delete {
+  font-weight: 500;
+  color: red;
+
+  cursor: pointer;
 }
