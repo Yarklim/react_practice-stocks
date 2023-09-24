@@ -14,9 +14,7 @@ const fetchStock = async (symbol) => {
 };
 
 const StockItem = ({ symbol, deleteFromFavorite }) => {
-  const { data, isLoading } = useQuery(`getStock/${symbol}`, () =>
-    fetchStock(symbol)
-  );
+  const { data } = useQuery(`getStock/${symbol}`, () => fetchStock(symbol));
   return (
     <li className={s.stockItem}>
       <div className={s.info}>
@@ -38,7 +36,7 @@ const StockItem = ({ symbol, deleteFromFavorite }) => {
           </p>
         </div>
       </div>
-      <p>{symbol.description}</p>
+      <p>{symbol.name}</p>
       <p onClick={() => deleteFromFavorite(symbol)} className={s.delete}>
         Delete
       </p>
