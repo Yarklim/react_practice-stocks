@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import stocksApi from '../../api/stocksApi';
 import { filterStocks } from '../../helpers/filterStocks';
 import s from './SearchStocks.module.scss';
+import { useKeyPress } from '../../hooks/useKeyPress';
 
 const SearchStocks = ({ addToFavorites }) => {
   const { data } = useQuery('getStocks', () => stocksApi['getStocks']());
@@ -11,6 +12,14 @@ const SearchStocks = ({ addToFavorites }) => {
   const [focus, setFocus] = useState(false);
 
   const autocompliteRef = useRef(null);
+
+  const isKeyPressed = useKeyPress('Escape');
+
+  useEffect(() => {
+    if (isKeyPressed) {
+      setValue('');
+    }
+  }, [setValue, isKeyPressed]);
 
   useEffect(() => {
     if (!data) return;

@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 import stocksApi from '../../api/stocksApi';
 import stockImg from '../../assets/stock.jpg';
 import s from './StockItem.module.scss';
 import Modal from '../Modal/Modal';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
+import { useKeyPress } from '../../hooks/useKeyPress';
 
 const fetchStock = async (symbol) => {
   const price = await stocksApi['getPrice'](symbol);
@@ -19,6 +20,14 @@ const StockItem = ({ symbol, deleteFromFavorite }) => {
   const { data } = useQuery(`getStock/${symbol}`, () => fetchStock(symbol));
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null);
+
+  const isKeyPressed = useKeyPress('Escape');
+
+  useEffect(() => {
+    if (isKeyPressed) {
+      setIsModalOpen(false);
+    }
+  }, [isKeyPressed]);
 
   const closeModal = () => {
     setIsModalOpen(false);
